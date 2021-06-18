@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Google熱門關鍵字查詢</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="wrapper">
+        <div class="title">Google熱門關鍵字查詢</div>
+        <div class="tag-search">
+          <input
+            type="text"
+            placeholder="請輸入關鍵字"
+            v-model.trim="keyword"
+          />
+          <button @click="getData(keyword)">查詢</button>
+          <button @click="clear" class="clear">全部清除</button>
+          <div class="search-history" v-if="hasTag">
+            查詢過關鍵字：<span v-for="list in history">{{list}}， </span>
+          </div>
+        </div>
+        <div class="tag-result">
+          <div v-if="hasTag">
+            <div class="count">共{{tags.length}}個結果</div>
+            <div v-for="i in tags" @click="getData(i)" class="result">
+              {{ i }}
+            </div>
+            <div class="source">資料來源：Google</div>
+          </div>
+          <div class="no-result" v-if="!hasTag">尚未獲得資料</div>
+        </div>
+      </div>
+    </div>
+    <script src="./js/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/all.js"></script>
+  </body>
+</html>
